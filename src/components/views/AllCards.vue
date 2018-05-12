@@ -6,6 +6,7 @@
 	</b-table>
 </template>
 <script>
+	import {API} from '@/api-common'
 	const items = [
   { edition: 'dom', collector_number: '040', name: 'Tu Vieja' },
   { edition: 'dom', collector_number: '041', name: 'Tu Vieja2' },
@@ -38,7 +39,17 @@ export default {
 		getImageUrl (card) {
 			return 'http://www.mtgpics.com/pics/reg/' + card.edition + '/' + card.collector_number + '.jpg'
 		}
-	}
+	},
+	mount () {
+		let self = this
+		 API.get('Card')
+          .then(response => {
+            self.items = response.data
+          })
+          .catch(error => {
+                this.checkError(error)
+    	  })
+      }
 }
 </script>
 <style>
