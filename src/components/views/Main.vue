@@ -2,9 +2,6 @@
   <div>
     <NavBar/>
     <router-view id='roterView'/>
-    <footer class="main-footer">
-      <strong>Copyright &copy; {{year}} <a href="javascript:;">Juanne</a>.</strong> All rights reserved.
-    </footer>
   </div>
 </template>   
 
@@ -13,12 +10,6 @@ export default {
   name: 'Main',
   data (router) {
     return {
-    }
-  },
-  computed: {
-    year () {
-      let y = new Date()
-      return y.getFullYear()
     }
   }
 }
