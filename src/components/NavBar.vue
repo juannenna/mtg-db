@@ -1,10 +1,10 @@
 <template>
   <b-navbar toggleable="md" type="dark" variant="dark" fixed="top">
     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-    <b-navbar-brand><router-link to="/">MTGDB</router-link></b-navbar-brand>
+    <b-navbar-brand><router-link to="/" class="nav">MTGDB</router-link></b-navbar-brand>
     <b-collapse is-nav id="nav_collapse">
       <b-navbar-nav>
-        <b-nav-item><router-link to="/cards"><i class="fas fa-database mr-sm-2"></i>My Collection</router-link></b-nav-item>
+        <b-nav-item><router-link class="nav" to="/cards"><i class="fas fa-database mr-sm-2"></i>My Collection</router-link></b-nav-item>
       </b-navbar-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">

@@ -6,9 +6,11 @@ import HelloWorld from '@/components/HelloWorld'
 import NavBar from '@/components/NavBar'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { card } from '@/filters'
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
+Vue.filter('card', card)
 Vue.component('NavBar', NavBar)
 Vue.component('HelloWorld', HelloWorld)
 new Vue({

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <NavBar/>
+  <div class="container-fluid">
     <router-view id='roterView'/>
   </div>
 </template>   
