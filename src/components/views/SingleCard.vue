@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<b-form @submit="onSubmit" @reset="onReset" v-if="show">
+		<multiselect v-model="selected" :options="options"></multiselect>
+		<!--<b-form @submit="onSubmit" @reset="onReset" v-if="show">
 			<b-row>
 				<b-col>
 					<b-form-group id="cardName" label="Card Name:" label-for="cardName">
@@ -27,7 +28,7 @@
 			</pre>
 			<b-button type="submit" variant="primary">Submit</b-button>
 			<b-button type="reset" variant="danger">Reset</b-button>
-		</b-form>
+		</b-form>-->
 	</div>
 </template>
 <script>
@@ -42,10 +43,8 @@ export default {
 		food: null,
 		checked: []
 	  },
-	  foods: [
-		{ text: 'Select One', value: null },
-		'Carrots', 'Beans', 'Tomatoes', 'Corn'
-	  ],
+	  selected: '',
+	  options: this.$options.filters.cardTitles(),
 	  show: true
     }
   },
@@ -63,5 +62,6 @@ export default {
   }
 }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>
 </style>	
