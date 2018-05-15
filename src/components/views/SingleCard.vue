@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<multiselect v-model="selected" :options="options"></multiselect>
+		<pre>{{selected}}</pre>
 		<!--<b-form @submit="onSubmit" @reset="onReset" v-if="show">
 			<b-row>
 				<b-col>
