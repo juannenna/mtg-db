@@ -6,7 +6,7 @@
 		<br/>
 		<b-pagination size="md" :total-rows="totalItems" v-model="currentPage" :per-page="10" @change="paginate($event)">
 		</b-pagination>
-		<b-form-input v-model="cardName" type="text" placeholder="Search for a Card"></b-form-input>
+		<b-form-input v-model="cardName" type="text" placeholder="Search for a Card" @change="filter($event)"></b-form-input>
 		<br>
 		<b-row>
 			<b-table striped hover :fields="fields" :items="items" id="cards" responsive :stacked="'sm'">
@@ -25,10 +25,16 @@
 				<template slot="cmc" slot-scope="data">
 					<i :class="'ms ms-' + data.item.cmc + ' ms-cost'"/>
 				</template>
+				<template slot="manaCost" slot-scope="data">
+					<template v-if="data.item && data.item.manaCost" v-for="i in parse(data.item.manaCost)">
+						<i :class="'ms ms-' + i.toLowerCase() + ' ms-cost ms-shadow'"/>
+					</template>
+				</template>
 				<template slot="type" slot-scope="data">
-					<i :id="'type-' + data.index" v-if="data.item.type === 'Legendary Planeswalker'" class="ms ms-planeswalker ms-2x"/>
-					<i :id="'type-' + data.index" v-else :class="'ms ms-' + data.item.type.toLowerCase() + ' ms-2x'"/>
-					<b-tooltip :target="'type-' + data.index" :title="data.item.type"></b-tooltip>
+					<template v-for="i in data.item.types">
+						<i :id="'type-' + data.index" :class="'ms ms-' + i.toLowerCase() + ' ms-2x'"/>
+						<b-tooltip :target="'type-' + data.index" :title="data.item.type"></b-tooltip>
+					</template>
 				</template>
 				<template slot="remove" slot-scope="data">
 					<b-btn @click="deleteCard(data.item.id)" variant="danger">Delete All</b-btn>
@@ -56,7 +62,7 @@ const fields = [
 	key: 'cmc',
 	label: 'CMC'
   }, {
-	key: 'casting_cost',
+	key: 'manaCost',
 	label: 'Casting Cost'
   }, {
 	key: 'type',
@@ -93,15 +99,20 @@ export default {
 	  let self = this
 	  API.get('dbCards?page=' + event)
 		.then(response => {
-		  self.items = response.data.docs
+		  self.items = []
+		  self.items = [...response.data.docs]
 		})
 	},
-	filter () {
+	filter (event) {
 	  let self = this
-	  API.get('dbCards?cardName=' + cardName)
+	  API.get('dbCards?cardName=' + event)
 		.then(response => {
-			self.items = response.data.docs
+		  self.items = response.data.docs
+		  self.totalItems = response.data.total
 		})
+	},
+	parse (string) {
+	  return string && string.match(/[^{}]+(?=\})/g)
 	}
   },
   mounted () {
