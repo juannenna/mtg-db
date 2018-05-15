@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<multiselect v-model="selected" :options="options"></multiselect>
-		<pre>{{selected}}</pre>
+		<pre class="language-json"><code>{{ selected | card }}</code></pre>
 		<!--<b-form @submit="onSubmit" @reset="onReset" v-if="show">
 			<b-row>
 				<b-col>

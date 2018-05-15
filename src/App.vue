@@ -34,6 +34,7 @@ export default {
     height:100%;
     background-image: url("assets/bckg.jpg");
     background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 #app {
   font-family: 'Beleren'; /*a name to be used later*/
